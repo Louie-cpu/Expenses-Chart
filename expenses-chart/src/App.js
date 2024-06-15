@@ -1,23 +1,25 @@
-import "./App.css"
+import { createGlobalStyle } from "styled-components"
+import styled from "styled-components"
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0 10px;
+  font-family: "Inter-Tight";
+`
+const Header = styled.span`
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      Luis Moreno
+      <Header>Expense Chart</Header>
+    </Container>
   )
 }
 
