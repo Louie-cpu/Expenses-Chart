@@ -8,7 +8,7 @@ const Container = styled.div`
   font-family: "Inter-Tight";
 `
 const TransactionComponent = (props) => {
-  return <Container>HomeComponent</Container>
+  return <Container>Transaction Component</Container>
 }
 
 export default TransactionComponent
