@@ -11,7 +11,7 @@ const Container = styled.div`
 const HomeComponent = (props) => {
   return (
     <Container>
-      HomeComponent
+      Home Component
       <OverviewComponent />
       <TransactionComponent />
     </Container>
