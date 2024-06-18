@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
+import HomeComponent from "./mods/home"
 
 const Container = styled.div`
   display: flex;
@@ -17,8 +18,8 @@ const Header = styled.span`
 function App() {
   return (
     <Container>
-      Luis Moreno
       <Header>Expense Chart</Header>
+      <HomeComponent />
     </Container>
   )
 }
