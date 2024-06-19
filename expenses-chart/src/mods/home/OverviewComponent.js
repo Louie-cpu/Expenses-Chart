@@ -5,8 +5,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
-  font-family: "Inter-Tight";
+  justify-content: center;
   width: 100%;
 `
 
@@ -30,14 +29,16 @@ const AddTransaction = styled.div`
   font-weight: bold;
   font-size: 15px;
 `
+
 const AddTransactionContainer = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid #e6e8e9;
   width: 100%;
+  max-width: 500px;
   gap: 10px;
   padding: 15px 20px;
-  margin: 10px 20px;
+  margin: 20px;
   & input {
     outline: none;
     padding: 10px 12px;
@@ -45,6 +46,7 @@ const AddTransactionContainer = styled.div`
     border: 1px solid #e6e8e9;
   }
 `
+
 const RadioBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -55,16 +57,43 @@ const RadioBox = styled.div`
     margin: 0 10px;
   }
 `
+
 const AddTransactionView = () => {
+  const [amount, setAmount] = useState("")
+  const [desc, setDesc] = useState("")
+  const [type, setType] = useState("EXPENSE")
+
   return (
     <AddTransactionContainer>
-      <input placeholder="Amount" />
-      <input placeholder="Description" />
+      <input
+        placeholder="Amount"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
+      <input
+        placeholder="Description"
+        value={desc}
+        onChange={(e) => setDesc(e.target.value)}
+      />
       <RadioBox>
-        <input type="radio" id="expense" name="type" value="EXPENSE" />
+        <input
+          type="radio"
+          id="expense"
+          name="type"
+          value="EXPENSE"
+          checked={type === "EXPENSE"}
+          onChange={() => setType("EXPENSE")}
+        />
         <label htmlFor="expense">Expense</label>
-        <input type="radio" id="income" name="type" value="INCOME" />
-        <label htmlFor="income">Income </label>
+        <input
+          type="radio"
+          id="income"
+          name="type"
+          value="INCOME"
+          checked={type === "INCOME"}
+          onChange={() => setType("INCOME")}
+        />
+        <label htmlFor="income">Income</label>
       </RadioBox>
       <AddTransaction>Add Transaction</AddTransaction>
     </AddTransactionContainer>
@@ -72,12 +101,15 @@ const AddTransactionView = () => {
 }
 
 const OverviewComponent = (props) => {
-  const [isAddTxn, toggleAddTxn] = useState(true)
+  const [isAddTxn, toggleAddTxn] = useState(false)
+
   return (
     <Container>
       <BalanceChart>
         Balance: $10000
-        <AddTransaction>{isAddTxn ? "Cancel" : "ADD"}</AddTransaction>
+        <AddTransaction onClick={() => toggleAddTxn(!isAddTxn)}>
+          {isAddTxn ? "Cancel" : "ADD"}
+        </AddTransaction>
       </BalanceChart>
       {isAddTxn && <AddTransactionView />}
     </Container>
