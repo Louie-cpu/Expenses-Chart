@@ -8,6 +8,7 @@ const Container = styled.div`
   align-items: center;
   margin: 30px 0 10px;
   font-family: "Inter-Tight";
+  width: 360px;
 `
 const Header = styled.span`
   color: black;
