@@ -1,4 +1,3 @@
-// index.js
 import styled from "styled-components"
 import OverviewComponent from "./OverviewComponent"
 import TransactionComponent from "./TransactionComponent"
@@ -14,28 +13,33 @@ const Container = styled.div`
 `
 
 const HomeComponent = (props) => {
-  const [transaction, updateTransaction] = useState([])
+  const [transactions, updateTransactions] = useState([])
   const [expense, updateExpense] = useState(0)
   const [income, updateIncome] = useState(0)
 
   const addTransaction = (payload) => {
     console.log("Adding transaction:", payload)
-    const transactionArray = [...transaction]
+    const transactionArray = [...transactions]
     transactionArray.push(payload)
-    updateTransaction(transactionArray)
+    updateTransactions(transactionArray)
   }
+
   const calculateBalance = () => {
     let exp = 0
     let inc = 0
-    transaction.map((payload) => {
+    transactions.forEach((payload) => {
       payload.type === "EXPENSE"
-        ? (exp = exp + payload.amount)
-        : (inc = inc + payload.amount)
+        ? (exp += payload.amount)
+        : (inc += payload.amount)
     })
     updateExpense(exp)
     updateIncome(inc)
   }
-  useEffect(() => calculateBalance(), [transaction])
+
+  useEffect(() => {
+    calculateBalance()
+  }, [transactions])
+
   return (
     <Container>
       <OverviewComponent
@@ -43,7 +47,7 @@ const HomeComponent = (props) => {
         expense={expense}
         income={income}
       />
-      <TransactionComponent transaction={transaction} />
+      <TransactionComponent transactions={transactions} />
     </Container>
   )
 }
