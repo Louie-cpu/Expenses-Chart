@@ -28,14 +28,14 @@ const Cell = styled.div`
   width: 100%;
   border-radius: 2px;
   align-items: center;
-  font-weight: normal;
+  font-weight: bold;
   justify-content: space-between;
   border: 1px solid #e6e8e9;
-  border-right: 4px solid ${(props) => (props.isExpense ? "red" : "green")};
+  border-right: 4px solid ${(props) => (props.$isExpense ? "red" : "green")};
 `
 
 const TransactionCell = ({ payload }) => (
-  <Cell isExpense={payload?.type === "EXPENSE"}>
+  <Cell $isExpense={payload?.type === "EXPENSE"}>
     <span>{payload.desc}</span>
     <span>${payload.amount}</span>
   </Cell>
@@ -43,20 +43,22 @@ const TransactionCell = ({ payload }) => (
 
 const TransactionComponent = ({ transactions }) => {
   const [searchText, updateSearchText] = useState("")
-  const [filteredTransaction, updateTxn] = useState(transactions)
-  const filteredData = () => {
-    if (!searchText || searchText.trim().length) {
-      updateTxn(props.transactions)
+  const [filteredTransactions, updateTxn] = useState(transactions)
+
+  const filteredData = (searchText) => {
+    if (!searchText.trim()) {
+      updateTxn(transactions)
       return
     }
-    let txn = [...props.transactions]
-    txn = txn.filter((payload) =>
-      payload.desc.toLowerCase().includes(searchText.toLowerCase().trim)
+    let txn = transactions.filter((payload) =>
+      payload.desc.toLowerCase().includes(searchText.toLowerCase().trim())
     )
     updateTxn(txn)
   }
 
-  useEffect(() => filteredData(searchText), [props.transactions])
+  useEffect(() => {
+    filteredData(searchText)
+  }, [transactions, searchText])
 
   return (
     <Container>
@@ -69,11 +71,11 @@ const TransactionComponent = ({ transactions }) => {
           filteredData(e.target.value)
         }}
       />
-      {filteredTransaction?.length
-        ? filteredTransaction.map((payload) => (
-            <TransactionCell payload={payload} />
+      {filteredTransactions?.length
+        ? filteredTransactions.map((payload) => (
+            <TransactionCell key={payload.id} payload={payload} />
           ))
-        : ""}
+        : "No Transactions Found"}
     </Container>
   )
 }

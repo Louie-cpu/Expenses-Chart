@@ -5,7 +5,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Align items to the start */
   width: 100%;
 `
 
@@ -17,6 +17,7 @@ const BalanceChart = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px; /* Add some space below the BalanceChart */
 `
 
 const AddTransaction = styled.div`
@@ -38,7 +39,7 @@ const AddTransactionContainer = styled.div`
   max-width: 500px;
   gap: 10px;
   padding: 15px 20px;
-  margin: 20px;
+  margin: 20px 0; /* Adjust margin to have spacing between the sections */
   & input {
     outline: none;
     padding: 10px 12px;
@@ -67,6 +68,7 @@ const AddTransactionView = (props) => {
     props.addTransaction({ amount: Number(amount), desc, type, id: Date.now() })
     props.toggleAddTxn()
   }
+
   return (
     <AddTransactionContainer>
       <input
@@ -104,23 +106,25 @@ const AddTransactionView = (props) => {
     </AddTransactionContainer>
   )
 }
+
 const ExpenseContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 12px;
-  margin: 20px;
+  margin: 20px 0; /* Adjust margin to have spacing between the sections */
 `
+
 const ExpenseBox = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 1px solid #e6e8e9;
+  border: 1px solid #e6e8e9;
   padding: 15px 20px;
   width: 135px;
   font-size: 14px;
   & span {
     font-weight: bold;
     font-size: 20px;
-    color: ${(props) => (props.isIncome ? "green" : "red")};
+    color: ${(props) => (props.$isIncome ? "green" : "red")};
   }
 `
 
@@ -142,10 +146,10 @@ const OverviewComponent = (props) => {
         />
       )}
       <ExpenseContainer>
-        <ExpenseBox isIncome={false}>
+        <ExpenseBox $isIncome={false}>
           Expense<span>${props.expense}</span>
         </ExpenseBox>
-        <ExpenseBox isIncome={true}>
+        <ExpenseBox $isIncome={true}>
           Income<span>${props.income}</span>
         </ExpenseBox>
       </ExpenseContainer>
