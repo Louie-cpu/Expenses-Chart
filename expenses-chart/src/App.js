@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
     font-family: 'Inter-Tight', sans-serif;
     background-color: #f0f0f0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
   }
 `
 
@@ -22,7 +23,8 @@ const Container = styled.div`
   align-items: center;
   margin-top: 100px;
   font-family: "Inter-Tight";
-  width: 550px;
+  max-width: 100%; /* Use max-width to ensure it fits within the viewport */
+  width: 550px; /* Adjust as needed */
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;

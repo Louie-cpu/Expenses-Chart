@@ -49,8 +49,8 @@ const AddTransactionContainer = styled.div`
   margin: 20px 0;
   background-color: #fff;
   border-radius: 8px;
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  max-height: ${(props) => (props.isVisible ? "500px" : "0px")};
+  opacity: ${(props) => (props.$isVisible ? 1 : 0)};
+  max-height: ${(props) => (props.$isVisible ? "500px" : "0px")};
   overflow: hidden;
   transition: max-height 0.5s ease, opacity 0.5s ease;
   & input {
@@ -79,12 +79,17 @@ const AddTransactionView = (props) => {
   const [type, setType] = useState("EXPENSE")
 
   const addTransaction = () => {
-    props.addTransaction({ amount: Number(amount), desc, type, id: Date.now() })
+    props.addTransaction({
+      amount: Number(amount),
+      desc,
+      type,
+      id: Date.now(),
+    })
     props.toggleAddTxn()
   }
 
   return (
-    <AddTransactionContainer isVisible={props.isVisible}>
+    <AddTransactionContainer $isVisible={props.isVisible}>
       <input
         placeholder="Amount"
         value={amount}
