@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
     font-family: 'Inter-Tight', sans-serif;
@@ -20,23 +20,39 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px 0 10px;
+  margin-top: 100px;
   font-family: "Inter-Tight";
-  width: 360px;
+  width: 550px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `
 
 const Header = styled.span`
-  color: black;
-  font-size: 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #3b5998;
+  color: white;
+  font-size: 50px;
   font-weight: bold;
+  font-family: "Inter-Tight";
+  align-items: center;
+  padding: 10px 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `
 
 function App() {
   return (
     <>
       <GlobalStyle />
+      <Header>Expense Chart</Header>
       <Container>
-        <Header>Expense Chart</Header>
         <HomeComponent />
       </Container>
     </>

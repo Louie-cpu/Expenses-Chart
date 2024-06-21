@@ -5,46 +5,60 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align items to the start */
+  justify-content: flex-start;
   width: 100%;
 `
 
 const BalanceChart = styled.div`
-  font-size: 18px;
+  font-size: 24px;
   width: 100%;
   font-weight: bold;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px; /* Add some space below the BalanceChart */
+  margin-bottom: 20px;
+  color: #333;
+  padding: 10px;
+  background-color: #3b5998;
+  color: white;
+  border-radius: 8px;
 `
 
 const AddTransaction = styled.div`
-  background: black;
+  background: #007bff;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #0056b3;
+  }
 `
 
 const AddTransactionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #e6e8e9;
   width: 100%;
-  max-width: 500px;
-  gap: 10px;
-  padding: 15px 20px;
-  margin: 20px 0; /* Adjust margin to have spacing between the sections */
+  gap: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #fff;
+  border-radius: 8px;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  max-height: ${(props) => (props.isVisible ? "500px" : "0px")};
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
   & input {
     outline: none;
     padding: 10px 12px;
     border-radius: 4px;
-    border: 1px solid #e6e8e9;
+    border: 1px solid #ccc;
+    font-size: 16px;
   }
 `
 
@@ -70,7 +84,7 @@ const AddTransactionView = (props) => {
   }
 
   return (
-    <AddTransactionContainer>
+    <AddTransactionContainer isVisible={props.isVisible}>
       <input
         placeholder="Amount"
         value={amount}
@@ -110,17 +124,19 @@ const AddTransactionView = (props) => {
 const ExpenseContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 12px;
-  margin: 20px 0; /* Adjust margin to have spacing between the sections */
+  gap: 20px;
+  margin: 20px 0;
 `
 
 const ExpenseBox = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #e6e8e9;
   padding: 15px 20px;
-  width: 135px;
+  width: 200px;
   font-size: 14px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   & span {
     font-weight: bold;
     font-size: 20px;
@@ -139,12 +155,11 @@ const OverviewComponent = (props) => {
           {isAddTxn ? "Cancel" : "ADD"}
         </AddTransaction>
       </BalanceChart>
-      {isAddTxn && (
-        <AddTransactionView
-          toggleAddTxn={toggleAddTxn}
-          addTransaction={props.addTransaction}
-        />
-      )}
+      <AddTransactionView
+        isVisible={isAddTxn}
+        toggleAddTxn={toggleAddTxn}
+        addTransaction={props.addTransaction}
+      />
       <ExpenseContainer>
         <ExpenseBox $isIncome={false}>
           Expense<span>${props.expense}</span>

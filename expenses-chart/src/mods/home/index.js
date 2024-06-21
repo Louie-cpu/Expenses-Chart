@@ -9,7 +9,10 @@ const Container = styled.div`
   align-items: center;
   margin: 30px 0 10px;
   font-family: "Inter-Tight";
-  width: 360px;
+  width: 450px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
 `
 
 const HomeComponent = (props) => {

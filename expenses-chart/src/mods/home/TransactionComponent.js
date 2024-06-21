@@ -5,16 +5,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 22px;
+  padding: 20px;
   font-size: 18px;
   width: 100%;
-  gap: 10px;
+  gap: 20px;
   font-weight: bold;
   & input {
     padding: 10px 12px;
     border-radius: 12px;
     background: #e6e8e9;
-    border: 1px solid #e6e8e9;
+    border: 1px solid #ccc;
     outline: none;
     width: 100%;
   }
@@ -30,8 +30,8 @@ const Cell = styled.div`
   align-items: center;
   font-weight: bold;
   justify-content: space-between;
-  border: 1px solid #e6e8e9;
-  border-right: 4px solid ${(props) => (props.$isExpense ? "red" : "green")};
+  border: 1px solid #ccc;
+  border-right: 8px solid ${(props) => (props.$isExpense ? "red" : "green")};
 `
 
 const TransactionCell = ({ payload }) => (
